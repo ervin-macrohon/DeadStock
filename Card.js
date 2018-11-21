@@ -6,10 +6,8 @@ import Image from 'react-native-scalable-image';
 export default Card = (props) => {
     return(
         <TouchableHighlight
-            onPress={() => props.navDetailView()}>
+            onPress={() => props.navDetailView(props.data)}>
             <View style={s.card}>
-            {console.log(props)}
-            {console.log({uri: props.data.img})}
                 <View style={s.image_placeholder}>
                     <Image
                         width={130}

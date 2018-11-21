@@ -95,10 +95,8 @@ class Featured extends Component{
             }
         ]
     }
-    navDetailView = () => {
-        console.log('navigating to detail view');
-        this.props.navigation.navigate('detailView');
-        console.log('actually navigated home');
+    navDetailView = (data) => {
+        this.props.navigation.navigate('detailView', { details: data });
     }
     render(){
         return(

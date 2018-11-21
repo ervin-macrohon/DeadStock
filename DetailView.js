@@ -1,9 +1,12 @@
 import React, { Component }  from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, } from 'react-native';
+import s from './Style';
+import Image from 'react-native-scalable-image';
+import { CustomPicker } from 'react-native-custom-picker';
 
 class DetailView extends Component{
     static navigationOptions = {
-        title: 'Featured',
+        title: 'Details',
         headerStyle: {
           backgroundColor: '#233237',
         },
@@ -13,13 +16,76 @@ class DetailView extends Component{
           fontSize: 24
         },
     };
+
+    state = {
+        sizePicked: null
+    };
+
     render(){
+        const options = ['7', '7.5', '8', '8.5', '9']
+        const details = this.props.navigation.getParam('details', '{}');
         return(
-            <View>
-                <Text>test</Text>
+            <View style={s.detail_view_container}> 
+                <View style={s.detail_view_image_placeholder}>
+                    <Image
+                        width={360}
+                        source={{
+                            uri: details.img
+                        }}
+                    />
+                </View>
+                <Text style={[s.header, {textAlign: 'center'}]}>
+                    {details.brand} {details.model} {details.colourway}
+                </Text>
+                <View style={s.last_sale}>
+                    <Text style={s.last_sale_text}>
+                        Last Sale: </Text>
+                    <Text style={s.last_sale_price}>
+                        ${details.averagePrice}
+                    </Text>
+                </View>
+                <View style={s.buy_sell_bar}>
+                    <View style={s.size_picker}>
+                        <CustomPicker
+                            fieldTemplate={this.renderField}
+                            options={options}
+                            placeholder='Choose Size'
+                            onValueChange={value => {
+                                this.setState({sizePicked: value})
+                            }}/>
+                    </View>
+                    <View style={[s.buy_sell_button, s.buy_button]}>
+                        <Text style={s.button_text}>
+                            Buy
+                        </Text>
+                    </View>
+                    <View style={[s.buy_sell_button, s.sell_button]}>
+                    <Text style={s.button_text}>
+                            Sell
+                        </Text>
+                    </View>
+                </View>
             </View>
         );
     }
+
+    renderField(settings) {
+        const { selectedItem, defaultText, getLabel, clear } = settings
+        return (
+          <View>
+            <View>
+              {!selectedItem && <Text style={s.picker_text}>{defaultText}</Text>}
+              {selectedItem && (
+                <View style={{flexDirection: 'row'}}>
+                  <Text style={s.picker_text}>
+                    {getLabel(selectedItem)}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </View>
+        )
+      }
 }
 
 export default DetailView;
