@@ -89,6 +89,13 @@ export default s = StyleSheet.create({
     },
     picker_text: {
         fontSize: 18,
-        color: 'white'
+        color: '#c0c0c0',
+        textAlign: 'center'
+    },
+    picker_field: {
+        justifyContent: 'center', 
+        flexDirection: 'column', 
+        height: 80,
+        width: 80
     }
 });

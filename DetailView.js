@@ -22,7 +22,8 @@ class DetailView extends Component{
     };
 
     render(){
-        const options = ['7', '7.5', '8', '8.5', '9']
+        const options = ['7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5', '12', '12.5',
+            '13', '13.5', '14', '14.5', '15']
         const details = this.props.navigation.getParam('details', '{}');
         return(
             <View style={s.detail_view_container}> 
@@ -73,15 +74,12 @@ class DetailView extends Component{
         const { selectedItem, defaultText, getLabel, clear } = settings
         return (
           <View>
-            <View>
+            <View style={s.picker_field}>
               {!selectedItem && <Text style={s.picker_text}>{defaultText}</Text>}
-              {selectedItem && (
-                <View style={{flexDirection: 'row'}}>
+              {selectedItem && 
                   <Text style={s.picker_text}>
-                    {getLabel(selectedItem)}
-                  </Text>
-                </View>
-              )}
+                    Size: {getLabel(selectedItem)}
+                  </Text>}
             </View>
           </View>
         )

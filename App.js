@@ -1,22 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createAppContainer } from "react-navigation";
 import Featured from './Featured';
+import SearchView from './SearchView';
 import DetailView from './DetailView';
+import {
+  createBottomTabNavigator,
+  createStackNavigator,
+  createAppContainer,
+} from 'react-navigation';
 
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: Featured
+export default createAppContainer(createStackNavigator({
+  Home: { 
+    screen: createBottomTabNavigator({
+      home: Featured,
+      search: SearchView
+    })
   },
   detailView: {
     screen: DetailView
   }
-});
-
-const AppContainer = createAppContainer(AppNavigator);
-
-export default class App extends React.Component {
-  render() {
-    return <AppContainer />;
-  }
-}
+}));
