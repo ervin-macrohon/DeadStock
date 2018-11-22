@@ -97,5 +97,30 @@ export default s = StyleSheet.create({
         flexDirection: 'column', 
         height: 80,
         width: 80
+    },
+    search_bar: {
+        height: 40,
+        width: '90%',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#c0c0c0',
+        borderRadius: 20,
+        paddingLeft: 10,
+        margin: 5,
+        fontSize: 18
+    },
+    result_row_box: {
+        height: 80,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        borderStyle: 'solid',
+        borderBottomWidth: 1,
+        borderColor: '#c0c0c0',
+    },
+    result_row_text_box: {
+        height: 80,
+        width: '50%',
+        fontSize: 18
     }
 });

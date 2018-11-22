@@ -1,5 +1,5 @@
 import React, { Component }  from 'react';
-import { Text, View, } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import s from './Style';
 import Image from 'react-native-scalable-image';
 import { CustomPicker } from 'react-native-custom-picker';
@@ -55,16 +55,16 @@ class DetailView extends Component{
                                 this.setState({sizePicked: value})
                             }}/>
                     </View>
-                    <View style={[s.buy_sell_button, s.buy_button]}>
+                    <TouchableOpacity style={[s.buy_sell_button, s.buy_button]}>
                         <Text style={s.button_text}>
                             Buy
                         </Text>
-                    </View>
-                    <View style={[s.buy_sell_button, s.sell_button]}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[s.buy_sell_button, s.sell_button]}>
                     <Text style={s.button_text}>
                             Sell
                         </Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
