@@ -9,14 +9,18 @@ import {
   createAppContainer,
 } from 'react-navigation';
 
-export default createAppContainer(createStackNavigator({
-  Home: { 
-    screen: createBottomTabNavigator({
-      home: Featured,
-      search: SearchView
-    })
-  },
-  detailView: {
-    screen: DetailView
+const FeaturedStack = createStackNavigator({
+  featured: {screen: Featured},
+  detailView: {screen: DetailView}
+});
+
+const SearchStack = createStackNavigator({
+  search: {screen: SearchView}
+});
+
+export default createAppContainer(createBottomTabNavigator(
+  {
+    home: {screen: FeaturedStack},
+    search: {screen: SearchStack}
   }
-}));
+));
