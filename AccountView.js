@@ -1,5 +1,6 @@
 import React, { Component }  from 'react';
 import { FlatList, Text, ScrollView, View } from 'react-native';
+import AccountOptions from './AccountOptions';
 
 class AccountView extends Component{
     static navigationOptions = {
@@ -13,10 +14,24 @@ class AccountView extends Component{
           fontSize: 24
         },
     };
+    state = {
+        options: [
+            { id: '1', label: 'Change Password' },
+            { id: '2', label: 'Log Out' }
+        ]
+    };
     render (){
         return (
             <View>
-                <Text>test</Text>
+                <FlatList 
+                    data={this.state.options}
+                    renderItem={({ item }) =>
+                         <AccountOptions 
+                             label={item} />
+                    }
+                    keyExtractor={(item) => item.id}
+                    style={s.scroll_list}
+                />
             </View>
         );
     }

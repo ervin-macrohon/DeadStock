@@ -122,5 +122,14 @@ export default s = StyleSheet.create({
         height: 80,
         width: '50%',
         fontSize: 18
+    },
+    account_options_box: {
+        width: '100%',
+        borderBottomWidth: 1,
+        borderColor: '#c0c0c0',
+        padding: 20
+    },
+    account_options_text: {
+        fontSize: 18
     }
 });
