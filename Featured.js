@@ -2,6 +2,7 @@ import React, { Component }  from 'react';
 import { FlatList, Text, ScrollView, View } from 'react-native';
 import Card from './Card';
 import s from './Style';
+import PTRView from 'react-native-pull-to-refresh';
 
 class Featured extends Component{
     static navigationOptions = {
@@ -72,19 +73,34 @@ class Featured extends Component{
     }
 
     componentDidMount () {
+        return this.fetchData();
+    }
+
+    fetchData = () => {
         return fetch (`https://deadstock-em.herokuapp.com/shoes/test`)
             .then(response => response.json())
             .then(responseJson => this.setState({mostPopular: responseJson}))
-            .catch(console.log('could not fetch most popular'));
+            .catch(e => console.log('could not fetch most popular', e));
     }
 
     navDetailView = (data) => {
         this.props.navigation.navigate('detailView', { details: data });
     }
 
+    _refresh = () => {
+        return new Promise((resolve) => {
+            setTimeout(()=>{
+                this.fetchData();
+                resolve('resolved');
+            }, 2000)
+          });
+    }
+
     render(){
         return(
-            <ScrollView style={s.featured_container}>
+            <PTRView
+                onRefresh={this._refresh}>
+            <View style={s.featured_container}>
                 <Text style={s.header}>
                     Most Popular
                 </Text>
@@ -127,7 +143,8 @@ class Featured extends Component{
                     keyExtractor={(item) => item.id}
                     style={s.scroll_list}
                 />
-            </ScrollView>
+            </View>
+            </PTRView>
         );
     }
 }
