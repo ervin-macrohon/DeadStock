@@ -131,5 +131,8 @@ export default s = StyleSheet.create({
     },
     account_options_text: {
         fontSize: 18
+    },
+    overlay: {
+        backgroundColor: 'rgba(0,0,0,0)'
     }
 });

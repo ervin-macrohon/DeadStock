@@ -16,32 +16,7 @@ class Featured extends Component{
         },
       };
     state = {
-        mostPopular: [
-            {
-                id: '1',
-                img: `https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2018%2F11%2Fair-jordan-11-concord-suprise-drop-nike-snkrs-4.jpg?q=90&w=2800&cbr=1&fit=max`,
-                brand: 'Jordan',
-                model: '11',
-                colourway: 'Concord',
-                averagePrice: 420
-            },
-            {
-                id: '2',
-                img: `https://sneakerbardetroit.com/wp-content/uploads/2018/01/air-jordan-12-cherry.png`,
-                brand: 'Jordan',
-                model: '12',
-                colourway: 'Cherry',
-                averagePrice: 300
-            },
-            {
-                id: '3',
-                img: `https://www.flightclub.com/media/catalog/product/cache/1/image/1600x1140/9df78eab33525d08d6e5fb8d27136e95/8/0/803111_01.jpg`,
-                brand: 'Jordan',
-                model: '3',
-                colourway: 'Black Cement',
-                averagePrice: 400
-            }
-        ],
+        mostPopular: [],
         endingSoon: [
             {
                 id: '4',
@@ -95,9 +70,18 @@ class Featured extends Component{
             }
         ]
     }
+
+    componentDidMount () {
+        return fetch (`https://deadstock-em.herokuapp.com/shoes/test`)
+            .then(response => response.json())
+            .then(responseJson => this.setState({mostPopular: responseJson}))
+            .catch(console.log('could not fetch most popular'));
+    }
+
     navDetailView = (data) => {
         this.props.navigation.navigate('detailView', { details: data });
     }
+
     render(){
         return(
             <ScrollView style={s.featured_container}>

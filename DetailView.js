@@ -1,8 +1,11 @@
 import React, { Component }  from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
+import { Overlay } from 'react-native-elements';
 import s from './Style';
 import Image from 'react-native-scalable-image';
 import { CustomPicker } from 'react-native-custom-picker';
+import * as Animatable from 'react-native-animatable';
+import MakeItRain from './MakeItRain.js';
 
 class DetailView extends Component{
     static navigationOptions = {
@@ -18,8 +21,13 @@ class DetailView extends Component{
     };
 
     state = {
-        sizePicked: null
+        sizePicked: null,
+        overlay: false
     };
+
+    showMeTheMoney = () => {
+        this.setState({overlay: true});
+    }
 
     render(){
         const options = ['7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5', '12', '12.5',
@@ -27,25 +35,31 @@ class DetailView extends Component{
         const details = this.props.navigation.getParam('details', '{}');
         return(
             <View style={s.detail_view_container}> 
-                <View style={s.detail_view_image_placeholder}>
+                <Animatable.View 
+                    style={s.detail_view_image_placeholder}
+                    animation="bounceInDown">
                     <Image
                         width={360}
                         source={{
                             uri: details.img
                         }}
                     />
-                </View>
-                <Text style={[s.header, {textAlign: 'center'}]}>
+                </Animatable.View>
+                <Animatable.Text 
+                    style={[s.header, {textAlign: 'center'}]}
+                    animation="bounceInLeft">
                     {details.brand} {details.model} {details.colourway}
-                </Text>
-                <View style={s.last_sale}>
+                </Animatable.Text>
+                <Animatable.View style={s.last_sale}
+                    animation="bounceInLeft">
                     <Text style={s.last_sale_text}>
                         Last Sale: </Text>
                     <Text style={s.last_sale_price}>
                         ${details.averagePrice}
                     </Text>
-                </View>
-                <View style={s.buy_sell_bar}>
+                </Animatable.View>
+                <Animatable.View style={s.buy_sell_bar}
+                    animation="bounceInUp">
                     <View style={s.size_picker}>
                         <CustomPicker
                             fieldTemplate={this.renderField}
@@ -60,12 +74,20 @@ class DetailView extends Component{
                             Buy
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[s.buy_sell_button, s.sell_button]}>
-                    <Text style={s.button_text}>
+                    <TouchableOpacity 
+                        style={[s.buy_sell_button, s.sell_button]}
+                        onPress={this.showMeTheMoney}>
+                        <Text style={s.button_text}>
                             Sell
                         </Text>
                     </TouchableOpacity>
-                </View>
+                </Animatable.View>
+                <Overlay
+                    isVisible={this.state.overlay}
+                    fullScreen={true}
+                    overlayStyle={s.overlay}>
+                    <MakeItRain />
+                </Overlay>
             </View>
         );
     }
