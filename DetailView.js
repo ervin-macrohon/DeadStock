@@ -29,6 +29,10 @@ class DetailView extends Component{
         this.setState({overlay: true});
     }
 
+    navBuyForm = () => {
+        this.props.navigation.navigate('buyForm');
+    }
+
     render(){
         const options = ['7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5', '12', '12.5',
             '13', '13.5', '14', '14.5', '15']
@@ -69,7 +73,9 @@ class DetailView extends Component{
                                 this.setState({sizePicked: value})
                             }}/>
                     </View>
-                    <TouchableOpacity style={[s.buy_sell_button, s.buy_button]}>
+                    <TouchableOpacity 
+                        style={[s.buy_sell_button, s.buy_button]}
+                        onPress={this.navBuyForm}>
                         <Text style={s.button_text}>
                             Buy
                         </Text>

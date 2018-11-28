@@ -10,15 +10,18 @@ import {
   createStackNavigator,
   createAppContainer,
 } from 'react-navigation';
+import BuyForm from './BuyForm';
 
 const FeaturedStack = createStackNavigator({
   featured: {screen: Featured},
-  detailView: {screen: DetailView}
+  detailView: {screen: DetailView},
+  buyForm: {screen: BuyForm}
 });
 
 const SearchStack = createStackNavigator({
   search: {screen: SearchView},
-  detailView: {screen: DetailView}
+  detailView: {screen: DetailView},
+  buyForm: {screen: BuyForm}
 });
 
 const AccountStack = createStackNavigator({
