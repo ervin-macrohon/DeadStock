@@ -134,5 +134,15 @@ export default s = StyleSheet.create({
     },
     overlay: {
         backgroundColor: 'rgba(0,0,0,0)'
+    },
+    input_box: {
+        width: '100%',
+        height: 40,
+        fontSize: 18
+    },
+    buy_form_container: {
+        width: '100%',
+        height: '60%',
+        justifyContent: 'space-around'
     }
 });
