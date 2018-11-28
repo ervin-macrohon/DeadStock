@@ -20,6 +20,8 @@ export default class BuyForm extends ValidationComponent{
     state = {
         Name: '',
         Address: '',
+        Mobile: '',
+        Email: '',
         stateChange: 0
     }
 
@@ -35,13 +37,24 @@ export default class BuyForm extends ValidationComponent{
         });
     }
 
+    handleEmailChange = (value) => {
+        this.setState({
+            Email: value
+        });
+    }
+
+    handleMobileChange = (value) => {
+        this.setState({
+            Mobile: value
+        });
+    }
+
     submit = () => {
-        // Call ValidationComponent validate method
         this.validate({
             Name: {maxlength: 50, required: true},
-            Address: {maxlength: 60, required: true}
-        //   email: {email: true},
-        //   number: {numbers: true},
+            Address: {maxlength: 60, required: true},
+            Email: {email: true, required: true, maxlength: 60},
+            Mobile: {numbers: true, maxlength: 14}
         //   date: {date: 'YYYY-MM-DD'}
         });
         this.setState(prevState=>({stateChange: prevState.stateChange + 1}));
@@ -59,17 +72,34 @@ export default class BuyForm extends ValidationComponent{
                     />
                 <TextInput 
                     style={s.input_box}
+                    placeholder="Email"
+                    spellCheck={false}
+                    value={this.state.Email}
+                    onChangeText={this.handleEmailChange}
+                    />
+                <TextInput 
+                    style={s.input_box}
+                    placeholder="Mobile"
+                    spellCheck={false}
+                    value={this.state.Mobile}
+                    onChangeText={this.handleMobileChange}
+                    />
+                <TextInput 
+                    style={s.input_box}
                     placeholder="Address"
                     spellCheck={false}
                     value={this.state.Address}
                     onChangeText={this.handleAddressChange}
                     />
                 <Button
+                    raised
                     title='Checkout'
                     onPress={this.submit} />
-                <Text>
+                <View style={s.errors_box}>
+                <Text style={{color: 'red'}}>
                     {this.getErrorMessages()}
                 </Text>
+                </View>
             </View>
         );
     }

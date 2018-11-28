@@ -138,11 +138,22 @@ export default s = StyleSheet.create({
     input_box: {
         width: '100%',
         height: 40,
-        fontSize: 18
+        fontSize: 18,
+        paddingLeft: 10
+    },
+    error_input: {
+        borderStyle: 'solid',
+        borderColor: 'red',
+        borderWidth: 1
     },
     buy_form_container: {
         width: '100%',
-        height: '60%',
+        height: '80%',
         justifyContent: 'space-around'
+    },
+    errors_box: {
+        width: '100%',
+        height: '20%',
+        paddingLeft: 10
     }
 });
